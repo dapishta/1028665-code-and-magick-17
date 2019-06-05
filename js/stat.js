@@ -54,11 +54,7 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = '#000';
       ctx.fillText(players[i], LEFT_MARGIN + POP_X, 246 + POP_Y);
       // Add times
-      ctx.fillText(
-        Math.floor(times[i]),
-        LEFT_MARGIN + POP_X,
-        74 + POP_Y + (BAR_MAX_HEIGHT - playerBarsHeights[i])
-      );
+      ctx.fillText(Math.floor(times[i]), LEFT_MARGIN + POP_X, 74 + POP_Y + (BAR_MAX_HEIGHT - playerBarsHeights[i]));
       // Style color for other players bars
       var randomSaturation = Math.floor(Math.random() * 255);
       ctx.fillStyle = 'rgba(0, 0, ' + randomSaturation + ', 1)';
@@ -67,11 +63,7 @@ window.renderStatistics = function (ctx, players, times) {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       }
       // Add bars
-      ctx.fillRect(
-        LEFT_MARGIN + POP_X,
-        90 + (BAR_MAX_HEIGHT - playerBarsHeights[i]),
-        BAR_WIDTH,
-        playerBarsHeights[i]
+      ctx.fillRect(LEFT_MARGIN + POP_X, 90 + (BAR_MAX_HEIGHT - playerBarsHeights[i]), BAR_WIDTH, playerBarsHeights[i]
       );
       // Add horizontal space
       LEFT_MARGIN += BAR_WIDTH + BAR_MARGIN;
