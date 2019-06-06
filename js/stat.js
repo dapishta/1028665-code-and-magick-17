@@ -8,70 +8,61 @@ window.renderStatistics = function (ctx, players, times) {
   var BAR_MARGIN = 50;
   var BAR_WIDTH = 40;
   var BAR_MAX_HEIGHT = 150;
-  var LEFT_MARGIN = 20;
+  var COLOR_BLACK = '#000';
+  var COLOR_WHITE = '#FFF';
+  var COLOR_GREY = 'rgba(0, 0, 0, 0.7)';
+  var COLOR_RED = '#FF0000';
   var maxTime = 0;
   var myNumberPlayer = 0;
   var playerBarsHeights = [];
+  var leftMargin = 20 + POP_X;
 
   // Pop-up shadow & background
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillStyle = COLOR_GREY;
   ctx.fillRect(POP_X + 10, POP_Y + 10, POP_WIDTH, POP_HEIGHT);
 
-  ctx.fillStyle = '#fff';
+  ctx.fillStyle = COLOR_WHITE;
   ctx.fillRect(POP_X, POP_Y, POP_WIDTH, POP_HEIGHT);
 
   // Titles
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = COLOR_BLACK;
   ctx.font = '16px "Pt Mono"';
-  ctx.fillText('Ура вы победили!', LEFT_MARGIN + POP_X, 30 + POP_Y);
-  ctx.fillText('Список результатов:', LEFT_MARGIN + POP_X, 50 + POP_Y);
+  ctx.fillText('Ура вы победили!', leftMargin, 30 + POP_Y);
+  ctx.fillText('Список результатов:', leftMargin, 50 + POP_Y);
 
-  // Find highest player and time
-  var findHighest = function () {
-    for (var i = 0; i < times.length; i++) {
-      if (maxTime < times[i]) {
-        maxTime = Math.floor(times[i]);
-      }
-    }
-  };
-
-  // Find my own number
-  var findMe = function () {
-    myNumberPlayer = players.indexOf('Вы');
-  };
-
-  // Find the heights for the bars
-  var findHeights = function () {
-    for (var i = 0; i < times.length; i++) {
-      playerBarsHeights[i] = Math.floor((times[i] * BAR_MAX_HEIGHT) / maxTime);
-    }
-  };
 
   // Draw histogramms
   var drawHistogramms = function () {
+    // Find highest time
+    for (var y = 0; y < times.length; y++) {
+      if (maxTime < times[y]) {
+        maxTime = Math.floor(times[y]);
+      }
+    }
+    // Find me
+    myNumberPlayer = players.indexOf('Вы');
     for (var i = 0; i < times.length; i++) {
+      // Find the heights for the bars
+      playerBarsHeights[i] = Math.floor((times[i] * BAR_MAX_HEIGHT) / maxTime);
       // Add names
-      ctx.fillStyle = '#000';
-      ctx.fillText(players[i], LEFT_MARGIN + POP_X, 246 + POP_Y);
+      ctx.fillStyle = COLOR_BLACK;
+      ctx.fillText(players[i], leftMargin, 246 + POP_Y);
       // Add times
-      ctx.fillText(Math.floor(times[i]), LEFT_MARGIN + POP_X, 74 + POP_Y + (BAR_MAX_HEIGHT - playerBarsHeights[i]));
+      ctx.fillText(Math.floor(times[i]), leftMargin, 74 + POP_Y + (BAR_MAX_HEIGHT - playerBarsHeights[i]));
       // Style color for other players bars
       var randomSaturation = Math.floor(Math.random() * 255);
       ctx.fillStyle = 'rgba(0, 0, ' + randomSaturation + ', 1)';
       // Style color for my bar
       if (i === myNumberPlayer) {
-        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+        ctx.fillStyle = COLOR_RED;
       }
       // Add bars
-      ctx.fillRect(LEFT_MARGIN + POP_X, 90 + (BAR_MAX_HEIGHT - playerBarsHeights[i]), BAR_WIDTH, playerBarsHeights[i]
+      ctx.fillRect(leftMargin, 90 + (BAR_MAX_HEIGHT - playerBarsHeights[i]), BAR_WIDTH, playerBarsHeights[i]
       );
       // Add horizontal space
-      LEFT_MARGIN += BAR_WIDTH + BAR_MARGIN;
+      leftMargin += BAR_WIDTH + BAR_MARGIN;
     }
   };
 
-  findHighest();
-  findMe();
-  findHeights();
   drawHistogramms();
 };
