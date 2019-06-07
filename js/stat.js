@@ -12,7 +12,6 @@ window.renderStatistics = function (ctx, players, times) {
   var COLOR_WHITE = '#FFF';
   var COLOR_GREY = 'rgba(0, 0, 0, 0.7)';
   var COLOR_RED = '#FF0000';
-  var maxTime = 0;
   var myNumberPlayer = 0;
   var playerBarsHeights = [];
   var leftMargin = 20 + POP_X;
@@ -31,30 +30,32 @@ window.renderStatistics = function (ctx, players, times) {
   ctx.fillText('Список результатов:', leftMargin, 50 + POP_Y);
 
   // Find highest time
-  var findHighest = function () {
-    for (var y = 0; y < times.length; y++) {
-      if (maxTime < times[y]) {
-        maxTime = Math.floor(times[y]);
+  var getMaxValue = function (numbers) {
+    for (var y = 0; y < numbers.length; y++) {
+      var maxValue = 0;
+      if (maxValue < numbers[y]) {
+        maxValue = Math.floor(numbers[y]);
       }
     }
+    return maxValue;
   };
 
   // Find random saturation
-  var findRandomSaturation = function () {
+  var getRandomColorNumber = function () {
     return Math.floor(Math.random() * 255);
   };
 
   // Find me
-  var findMe = function () {
-    return players.indexOf('Вы');
+  var getObjectValueNumber = function (object) {
+    return object.indexOf('Вы');
   };
 
   // Draw histogramms
   var drawHistogramms = function () {
 
-    findHighest();
+    var maxTime = getMaxValue(times);
     // Find me
-    myNumberPlayer = findMe();
+    myNumberPlayer = getObjectValueNumber(players);
 
     for (var i = 0; i < times.length; i++) {
       // Find the heights for the bars
@@ -65,7 +66,7 @@ window.renderStatistics = function (ctx, players, times) {
       // Add times
       ctx.fillText(Math.floor(times[i]), leftMargin, 74 + POP_Y + (BAR_MAX_HEIGHT - playerBarsHeights[i]));
       // Style color for other players bars
-      var randomSaturation = findRandomSaturation();
+      var randomSaturation = getRandomColorNumber();
       ctx.fillStyle = 'rgba(0, 0, ' + randomSaturation + ', 1)';
       // Style color for my bar
       if (i === myNumberPlayer) {
