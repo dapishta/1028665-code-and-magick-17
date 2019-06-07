@@ -12,8 +12,6 @@ window.renderStatistics = function (ctx, players, times) {
   var COLOR_WHITE = '#FFF';
   var COLOR_GREY = 'rgba(0, 0, 0, 0.7)';
   var COLOR_RED = '#FF0000';
-  var myNumberPlayer = 0;
-  var playerBarsHeights = [];
   var leftMargin = 20 + POP_X;
 
   // Pop-up shadow & background
@@ -31,8 +29,8 @@ window.renderStatistics = function (ctx, players, times) {
 
   // Find highest time
   var getMaxValue = function (numbers) {
+    var maxValue = 0;
     for (var y = 0; y < numbers.length; y++) {
-      var maxValue = 0;
       if (maxValue < numbers[y]) {
         maxValue = Math.floor(numbers[y]);
       }
@@ -52,6 +50,8 @@ window.renderStatistics = function (ctx, players, times) {
 
   // Draw histogramms
   var drawHistogramms = function () {
+    var myNumberPlayer = 0;
+    var playerBarsHeights = [];
 
     var maxTime = getMaxValue(times);
     // Find me
