@@ -9,8 +9,6 @@ var SIMILAR_WIZARD_ITEM = document.querySelector('#similar-wizard-template').con
 var SIMILAR_LABEL_TAG = SIMILAR_WIZARD_ITEM.querySelector('.setup-similar-label');
 var SIMILAR_WIZARD_COAT_TAG = SIMILAR_WIZARD_ITEM.querySelector('.wizard-coat');
 var SIMILAR_WIZARD_EYES_TAG = SIMILAR_WIZARD_ITEM.querySelector('.wizard-eyes');
-var fragment = document.createDocumentFragment();
-var SIMILAR_WIZARDS_NUMBER = 4;
 
 
 // Data
@@ -22,31 +20,37 @@ var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Get random string
 var getRandomString = function (data) {
-  var result = Math.floor(Math.random() * data.length);
+  var result = Math.round(Math.random() * data.length);
   return data[result];
 };
 
-
-// Create ramdom wizards & render wizards and add them to fragment
-
-for (var i = 0; i < SIMILAR_WIZARDS_NUMBER; i++) {
-  var wizards = [];
-  wizards[i] = {
-    name: getRandomString(NAMES),
-    surname: getRandomString(SURNAMES),
-    coatColor: getRandomString(COAT_COLOR),
-    eyesColor: getRandomString(EYES_COLOR)
-  }
-  SIMILAR_LABEL_TAG.textContent = wizards[i].name + ' ' + wizards[i].surname;
-  SIMILAR_WIZARD_COAT_TAG.style.fill = wizards[i].coatColor;
-  SIMILAR_WIZARD_EYES_TAG.style.fill = wizards[i].eyesColor;
-  fragment.appendChild(SIMILAR_WIZARD_ITEM.cloneNode(true));
+// Show hidden
+var showHidden = function (tag, className) {
+  tag.classList.remove(className);
 }
 
-SIMILAR_LIST_TAG.appendChild(fragment);
+// Render wizards and add them to fragment
+var renderSimilarWizards = function () {
+  var fragment = document.createDocumentFragment();
+  var SIMILAR_WIZARDS_NUMBER = 4;
+  var wizards = [];
 
+  for (var i = 0; i < SIMILAR_WIZARDS_NUMBER; i++) {
+    wizards[i] = {
+      name: getRandomString(NAMES),
+      surname: getRandomString(SURNAMES),
+      coatColor: getRandomString(COAT_COLOR),
+      eyesColor: getRandomString(EYES_COLOR)
+    }
+    SIMILAR_LABEL_TAG.textContent = wizards[i].name + ' ' + wizards[i].surname;
+    SIMILAR_WIZARD_COAT_TAG.style.fill = wizards[i].coatColor;
+    SIMILAR_WIZARD_EYES_TAG.style.fill = wizards[i].eyesColor;
+    fragment.appendChild(SIMILAR_WIZARD_ITEM.cloneNode(true));
+  }
+  SIMILAR_LIST_TAG.appendChild(fragment);
+}
 
-// Show the pop-up and similar section
-SETUP_TAG.classList.remove('hidden');
-SIMILAR_SECTION_TAG.classList.remove('hidden');
-
+// Show the pop-up and similar section with wizards
+renderSimilarWizards();
+showHidden(SETUP_TAG, 'hidden');
+showHidden(SIMILAR_SECTION_TAG, 'hidden');
