@@ -41,7 +41,7 @@ var createMockData = function (numberOfObjects) {
 
 
 // Add wizards to fragment
-var createSimilarWizards = function (array) {
+var createDOMElements = function (array) {
   var fragmentTag = document.createDocumentFragment();
   var similarWizardItemTag = document.querySelector('#similar-wizard-template').content.querySelector('div.setup-similar-item');
   var similarLabelTag = similarWizardItemTag.querySelector('.setup-similar-label');
@@ -70,8 +70,8 @@ var renderSimilarWizardsSection = function (number) {
   var similarSectionTag = document.querySelector('.setup-similar');
   var similarListTag = document.querySelector('.setup-similar-list');
   var wizards = createMockData(number);
-  var createdWizards = createSimilarWizards(wizards);
-  insertTag(createdWizards, similarListTag)
+  var createdWizardsFragmnetTag = createDOMElements(wizards);
+  insertTag(createdWizardsFragmnetTag, similarListTag)
   removeClass(similarSectionTag, 'hidden');
 }
 
