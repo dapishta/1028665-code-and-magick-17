@@ -40,7 +40,7 @@ var createMockData = function (numberOfObjects) {
 };
 
 
-// Add wizards to fragment
+// Create DOM Elements
 var createDOMElements = function (array) {
   var fragmentTag = document.createDocumentFragment();
   var similarWizardItemTag = document.querySelector('#similar-wizard-template').content.querySelector('div.setup-similar-item');
@@ -54,7 +54,6 @@ var createDOMElements = function (array) {
     similarWizardEyesTag.style.fill = array[i].eyesColor;
     fragmentTag.appendChild(similarWizardItemTag.cloneNode(true));
   }
-  // similarListTag.appendChild(fragmentTag);
   return fragmentTag;
 }
 
