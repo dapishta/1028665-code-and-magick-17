@@ -173,11 +173,10 @@ var changeColor = function (isFill, tag, inputTag, array) {
   var nextColor = getNextColor(inputTag, array);
   if (isFill) {
     tag.style.fill = nextColor;
-    inputTag.value = nextColor;
   } else {
     tag.style.background = nextColor;
-    inputTag.value = nextColor;
   }
+  inputTag.value = nextColor;
 }
 
 
