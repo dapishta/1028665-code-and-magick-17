@@ -160,7 +160,7 @@ var getNextColor = function (inputTag, array) {
   var currentColor = inputTag.value;
   var currentIndex = array.indexOf(currentColor);
   if (currentIndex === array.length - 1) {
-    currentIndex -= currentIndex;
+    currentIndex = 0;
   }
   var nextIndex = currentIndex + 1;
   var nextColor = array[nextIndex];
