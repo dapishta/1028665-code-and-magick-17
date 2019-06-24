@@ -100,8 +100,10 @@ renderSimilarWizardsSection(SIMILAR_WIZARDS_NUMBER);
 
 // Open and close the pop-up
 
-var openPopup = function (tag) {
-  removeClass(tag, 'hidden');
+var openPopup = function () {
+  setupTag.style.top = '80px';
+  setupTag.style.left = '50%';
+  removeClass(setupTag, 'hidden');
   document.addEventListener('keydown', onPopupEscTagPress);
   submitButtonTag.addEventListener('click', onSaveBtnTagClick);
   submitButtonTag.addEventListener('keydown', onSaveBtnTagPress);
@@ -110,25 +112,25 @@ var openPopup = function (tag) {
   userFireballTag.addEventListener('click', onUserFireballTagClick);
 };
 
-var closePopup = function (tag) {
-  addClass(tag, 'hidden');
+var closePopup = function () {
+  addClass(setupTag, 'hidden');
   document.removeEventListener('keydown', onPopupEscTagPress);
 };
 
 // Event handlers
 
 var onUserAvatarTagClick = function () {
-  openPopup(setupTag);
+  openPopup();
 };
 
 var onUserAvatarTagPress = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    openPopup(setupTag);
+    openPopup();
   }
 };
 
 var onCloseIconTagClick = function () {
-  closePopup(setupTag);
+  closePopup();
 };
 
 var onCloseIconTagPress = function (evt) {
@@ -139,7 +141,7 @@ var onCloseIconTagPress = function (evt) {
 
 var onPopupEscTagPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup(setupTag);
+    closePopup();
   }
 }
 
