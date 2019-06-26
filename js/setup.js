@@ -5,6 +5,7 @@
 
 (function () {
   // Variables & Constants
+  var utils = window.utils;
   var setupTag = document.querySelector('.setup');
   var submitButtonTag = setupTag.querySelector('.setup-submit');
   var formTag = setupTag.querySelector('.setup-wizard-form');
@@ -42,7 +43,7 @@
     formTag.submit();
   };
   var onSaveBtnTagPress = function (evt) {
-    window.util.isEnterEvent(evt, formTag.submit);
+    utils.isEnterEvent(evt, formTag.submit);
   };
 })();
 

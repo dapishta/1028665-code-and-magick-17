@@ -5,16 +5,16 @@
 (function () {
 
   var SIMILAR_WIZARDS_NUMBER = 4;
-
+  var utils = window.utils;
   // Create mock data for wizards
   var createMockData = function (numberOfObjects) {
     var array = [];
     for (var i = 0; i < numberOfObjects; i++) {
       array[i] = {
-        name: window.util.getRandomString(window.data.names),
-        surname: window.util.getRandomString(window.data.surnames),
-        coatColors: window.util.getRandomString(window.data.coatColors),
-        eyesColors: window.util.getRandomString(window.data.eyesColors)
+        name: utils.getRandomValue(window.data.names),
+        surname: utils.getRandomValue(window.data.surnames),
+        coatColors: utils.getRandomValue(window.data.coatColors),
+        eyesColors: utils.getRandomValue(window.data.eyesColors)
       }
     }
     return array;
@@ -47,8 +47,8 @@
     var similarListTag = document.querySelector('.setup-similar-list');
     var wizards = createMockData(number);
     var createdWizardsFragmnetTag = createDOMElements(wizards);
-    window.util.insertTag(createdWizardsFragmnetTag, similarListTag)
-    window.util.removeClass(similarSectionTag, 'hidden');
+    utils.insertTag(createdWizardsFragmnetTag, similarListTag)
+    utils.removeClass(similarSectionTag, 'hidden');
   }
 
   renderSimilarWizardsSection(SIMILAR_WIZARDS_NUMBER);

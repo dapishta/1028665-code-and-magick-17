@@ -4,6 +4,7 @@
 // Opening and closing the pop-up
 
 (function () {
+  var utils = window.utils;
   var setupTag = document.querySelector('.setup');
   var userAvatarTag = document.querySelector('.setup-open');
   var closeIconTag = setupTag.querySelector('.setup-close');
@@ -12,13 +13,12 @@
     window.addPopupListeners();
     setupTag.style.top = '80px';
     setupTag.style.left = '50%';
-    window.util.removeClass(setupTag, 'hidden');
+    utils.removeClass(setupTag, 'hidden');
     document.addEventListener('keydown', onPopupEscTagPress);
   };
 
   var closePopup = function () {
-    window.isPopupOpen = false;
-    window.util.addClass(setupTag, 'hidden');
+    utils.addClass(setupTag, 'hidden');
     document.removeEventListener('keydown', onPopupEscTagPress);
   };
 
@@ -29,7 +29,7 @@
   };
 
   var onUserAvatarTagPress = function (evt) {
-    window.util.isEnterEvent(evt, openPopup)
+    utils.isEnterEvent(evt, openPopup)
   };
 
   var onCloseIconTagClick = function () {
@@ -37,11 +37,11 @@
   };
 
   var onCloseIconTagPress = function (evt) {
-    window.util.isEnterEvent(evt, closePopup)
+    utils.isEnterEvent(evt, closePopup)
   };
 
   var onPopupEscTagPress = function (evt) {
-    window.util.isEscEvent(evt, closePopup)
+    utils.isEscEvent(evt, closePopup)
   }
 
   userAvatarTag.addEventListener('click', onUserAvatarTagClick);
