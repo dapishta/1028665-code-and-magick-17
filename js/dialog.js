@@ -1,6 +1,60 @@
 /* eslint-disable semi */
 'use strict';
 
+// Opening and closing the pop-up
+
+(function () {
+  var utils = window.utils;
+  var setupTag = document.querySelector('.setup');
+  var userAvatarTag = document.querySelector('.setup-open');
+  var closeIconTag = setupTag.querySelector('.setup-close');
+  var addPopupListeners = window.addPopupListeners;
+
+  var openPopup = function () {
+    addPopupListeners();
+    setupTag.style.top = '80px';
+    setupTag.style.left = '50%';
+    utils.removeClass(setupTag, 'hidden');
+    document.addEventListener('keydown', onPopupEscTagPress);
+  };
+
+  var closePopup = function () {
+    utils.addClass(setupTag, 'hidden');
+    document.removeEventListener('keydown', onPopupEscTagPress);
+  };
+
+  // Event handlers
+
+  var onUserAvatarTagClick = function () {
+    openPopup();
+  };
+
+  var onUserAvatarTagPress = function (evt) {
+    utils.isEnterEvent(evt, openPopup)
+  };
+
+  var onCloseIconTagClick = function () {
+    closePopup();
+  };
+
+  var onCloseIconTagPress = function (evt) {
+    utils.isEnterEvent(evt, closePopup)
+  };
+
+  var onPopupEscTagPress = function (evt) {
+    utils.isEscEvent(evt, closePopup)
+  }
+
+  userAvatarTag.addEventListener('click', onUserAvatarTagClick);
+  userAvatarTag.addEventListener('keydown', onUserAvatarTagPress);
+  closeIconTag.addEventListener('click', onCloseIconTagClick);
+  closeIconTag.addEventListener('keydown', onCloseIconTagPress);
+
+})();
+
+
+// Dragging pop-up
+
 (function () {
   var setupTag = document.querySelector('.setup');
   var dialogHandlerTag = setupTag.querySelector('.upload');
