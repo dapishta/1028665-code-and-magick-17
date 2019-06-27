@@ -6,6 +6,8 @@
 (function () {
   // Variables & Constants
   var utils = window.utils;
+  var colorize = window.colorize;
+  var data = window.data;
   var setupTag = document.querySelector('.setup');
   var submitButtonTag = setupTag.querySelector('.setup-submit');
   var formTag = setupTag.querySelector('.setup-wizard-form');
@@ -17,7 +19,7 @@
   var userFireballTag = setupPlayerTag.querySelector('.setup-fireball-wrap');
   var userFireballInputTag = userFireballTag.querySelector('input[name="fireball-color"]');
 
-  window.addPopupListeners = function () {
+  var addPopupListeners = function () {
     submitButtonTag.addEventListener('click', onSaveBtnTagClick);
     submitButtonTag.addEventListener('keydown', onSaveBtnTagPress);
     userWizardCoatTag.addEventListener('click', onUserWizardCoatTagClick);
@@ -28,13 +30,13 @@
   // Changing colors for wizard
 
   var onUserWizardCoatTagClick = function () {
-    window.colorize(true, userWizardCoatTag, userWizardCoatInputTag, window.data.coatColors)
+    colorize(true, userWizardCoatTag, userWizardCoatInputTag, data.coatColors)
   };
   var onUserWizardEyesTagClick = function () {
-    window.colorize(true, userWizardEyesTag, userWizardEyesInputTag, window.data.eyesColors)
+    colorize(true, userWizardEyesTag, userWizardEyesInputTag, data.eyesColors)
   };
   var onUserFireballTagClick = function () {
-    window.colorize(false, userFireballTag, userFireballInputTag, window.data.fireballColors)
+    colorize(false, userFireballTag, userFireballInputTag, data.fireballColors)
   };
 
   // Saving form
@@ -45,6 +47,8 @@
   var onSaveBtnTagPress = function (evt) {
     utils.isEnterEvent(evt, formTag.submit);
   };
+
+  window.addPopupListeners = addPopupListeners;
 })();
 
 

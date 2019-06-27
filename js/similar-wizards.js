@@ -6,15 +6,17 @@
 
   var SIMILAR_WIZARDS_NUMBER = 4;
   var utils = window.utils;
+  var data = window.data;
+
   // Create mock data for wizards
   var createMockData = function (numberOfObjects) {
     var array = [];
     for (var i = 0; i < numberOfObjects; i++) {
       array[i] = {
-        name: utils.getRandomValue(window.data.names),
-        surname: utils.getRandomValue(window.data.surnames),
-        coatColors: utils.getRandomValue(window.data.coatColors),
-        eyesColors: utils.getRandomValue(window.data.eyesColors)
+        name: utils.getRandomValue(data.names),
+        surname: utils.getRandomValue(data.surnames),
+        coatColors: utils.getRandomValue(data.coatColors),
+        eyesColors: utils.getRandomValue(data.eyesColors)
       }
     }
     return array;

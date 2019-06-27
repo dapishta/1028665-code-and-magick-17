@@ -8,9 +8,10 @@
   var setupTag = document.querySelector('.setup');
   var userAvatarTag = document.querySelector('.setup-open');
   var closeIconTag = setupTag.querySelector('.setup-close');
+  var addPopupListeners = window.addPopupListeners;
 
   var openPopup = function () {
-    window.addPopupListeners();
+    addPopupListeners();
     setupTag.style.top = '80px';
     setupTag.style.left = '50%';
     utils.removeClass(setupTag, 'hidden');

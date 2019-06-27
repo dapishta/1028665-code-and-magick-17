@@ -2,7 +2,6 @@
 'use strict';
 
 (function () {
-
   var getNextColor = function (inputTag, array) {
     var currentColor = inputTag.value;
     var currentIndex = array.indexOf(currentColor);
@@ -14,7 +13,7 @@
     return nextColor;
   }
 
-  window.colorize = function (isFill, tag, inputTag, array) {
+  var colorize = function (isFill, tag, inputTag, array) {
     var nextColor = getNextColor(inputTag, array);
     if (isFill) {
       tag.style.fill = nextColor;
@@ -23,6 +22,8 @@
     }
     inputTag.value = nextColor;
   }
+
+  window.colorize = colorize;
 
 })();
 
