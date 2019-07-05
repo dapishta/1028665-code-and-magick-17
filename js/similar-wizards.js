@@ -4,10 +4,9 @@
 (function () {
 
   var userDialog = document.querySelector('.setup');
-
   var similarListElement = userDialog.querySelector('.setup-similar-list');
-
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+  var load = window.load;
 
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -44,7 +43,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.load(onLoadSuccess, onLoadError);
+  load(onLoadSuccess, onLoadError);
 
 })();
 

@@ -7,7 +7,7 @@
   // Variables & Constants
   var utils = window.utils;
   var colorize = window.colorize;
-  var closePopup = window.closePopup;
+  var save = window.save;
   var data = window.data;
   var setupTag = document.querySelector('.setup');
   var submitButtonTag = setupTag.querySelector('.setup-submit');
@@ -42,14 +42,16 @@
 
   // Saving form
 
-  var onSaveBtnTagClick = function () {
-    formTag.submit();
+  var onSaveBtnTagClick = function (evt) {
+    evt.preventDefault();
+    save(new FormData(formTag), onSaveSuccess, onSaveError);
   };
   var onSaveBtnTagPress = function (evt) {
     utils.isEnterEvent(evt, formTag.submit);
   };
 
   var onSaveSuccess = function () {
+    var closePopup = window.closePopup;
     closePopup();
   };
 
@@ -64,10 +66,6 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  formTag.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-    window.save(new FormData(formTag), onSaveSuccess, onSaveError);
-  });
 
   window.addPopupListeners = addPopupListeners;
 })();

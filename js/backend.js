@@ -38,6 +38,7 @@
   var save = function (data, onSuccess, onError) {
 
     var xhr = new XMLHttpRequest();
+    xhr.open('POST', URL);
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
@@ -48,7 +49,7 @@
       }
     });
 
-    xhr.open('POST', URL);
+
     xhr.send(data);
   };
 
