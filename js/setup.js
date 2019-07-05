@@ -7,6 +7,7 @@
   // Variables & Constants
   var utils = window.utils;
   var colorize = window.colorize;
+  var save = window.save;
   var data = window.data;
   var setupTag = document.querySelector('.setup');
   var submitButtonTag = setupTag.querySelector('.setup-submit');
@@ -41,12 +42,30 @@
 
   // Saving form
 
-  var onSaveBtnTagClick = function () {
-    formTag.submit();
+  var onSaveBtnTagClick = function (evt) {
+    evt.preventDefault();
+    save(new FormData(formTag), onSaveSuccess, onSaveError);
   };
   var onSaveBtnTagPress = function (evt) {
     utils.isEnterEvent(evt, formTag.submit);
   };
+
+  var onSaveSuccess = function () {
+    var closePopup = window.closePopup;
+    closePopup();
+  };
+
+  var onSaveError = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
 
   window.addPopupListeners = addPopupListeners;
 })();
