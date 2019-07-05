@@ -50,6 +50,8 @@
   closeIconTag.addEventListener('click', onCloseIconTagClick);
   closeIconTag.addEventListener('keydown', onCloseIconTagPress);
 
+  window.closePopup = closePopup;
+
 })();
 
 
