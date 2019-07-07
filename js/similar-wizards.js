@@ -2,33 +2,49 @@
 'use strict';
 
 (function () {
-
-  var userDialog = document.querySelector('.setup');
-  var similarListElement = userDialog.querySelector('.setup-similar-list');
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+  var renderSimilarWizards = window.renderSimilarWizards;
   var load = window.load;
+  var setupTag = document.querySelector('.setup');
+  var setupPlayerTag = setupTag.querySelector('.setup-player');
+  var userWizardCoatInputTag = setupPlayerTag.querySelector('input[name="coat-color"]');
+  var userWizardEyesInputTag = setupPlayerTag.querySelector('input[name="eyes-color"]');
+  var wizards = [];
 
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    var similarLabelTag = wizardElement.querySelector('.setup-similar-label');
-    var similarWizardCoatTag = wizardElement.querySelector('.wizard-coat');
-    var similarWizardEyesTag = wizardElement.querySelector('.wizard-eyes');
-
-    similarLabelTag.textContent = wizard.name;
-    similarWizardCoatTag.style.fill = wizard.colorCoat;
-    similarWizardEyesTag.style.fill = wizard.colorEyes;
-    return wizardElement;
-  };
-
-  var onLoadSuccess = function (wizards) {
-    var fragmentTag = document.createDocumentFragment();
-
-    for (var i = 0; i < 4; i++) {
-      fragmentTag.appendChild(renderWizard(wizards[i]));
+  var getRank = function (wizard) {
+    var rank = 0;
+    if (wizard.colorCoat === userWizardCoatInputTag.value) {
+      rank += 2;
     }
-    similarListElement.appendChild(fragmentTag);
+    if (wizard.colorEyes === userWizardEyesInputTag.value) {
+      rank += 1;
+    }
+    return rank;
+  }
 
-    userDialog.querySelector('.setup-similar').classList.remove('hidden');
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
+  var updateWizards = function () {
+    renderSimilarWizards(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  }
+
+  var onLoadSuccess = function (data) {
+    wizards = data;
+    renderSimilarWizards(wizards)
+
   };
 
   var onLoadError = function (errorMessage) {
@@ -43,6 +59,8 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
+
+  window.updateWizards = updateWizards;
   load(onLoadSuccess, onLoadError);
 
 })();

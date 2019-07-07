@@ -5,6 +5,8 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
+  var lastTimeout;
+
   var utils = {
     isEscEvent: function (evt, action) {
       if (evt.keyCode === ESC_KEYCODE) {
@@ -28,6 +30,14 @@
     },
     insertTag: function (tagToBeInserted, tagWhereToInsert) {
       tagWhereToInsert.appendChild(tagToBeInserted);
+    },
+    debounce: function (action, interval) {
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        action();
+      }, interval);
     }
   };
   window.utils = utils;

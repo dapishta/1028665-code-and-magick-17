@@ -9,6 +9,8 @@
   var colorize = window.colorize;
   var save = window.save;
   var data = window.data;
+  var debounce = utils.debounce;
+  var updateWizards = window.updateWizards;
   var setupTag = document.querySelector('.setup');
   var submitButtonTag = setupTag.querySelector('.setup-submit');
   var formTag = setupTag.querySelector('.setup-wizard-form');
@@ -30,12 +32,16 @@
 
   // Changing colors for wizard
 
+
   var onUserWizardCoatTagClick = function () {
-    colorize(true, userWizardCoatTag, userWizardCoatInputTag, data.coatColors)
+    colorize(true, userWizardCoatTag, userWizardCoatInputTag, data.coatColors);
+    debounce(updateWizards, 500);
   };
   var onUserWizardEyesTagClick = function () {
-    colorize(true, userWizardEyesTag, userWizardEyesInputTag, data.eyesColors)
+    colorize(true, userWizardEyesTag, userWizardEyesInputTag, data.eyesColors);
+    debounce(updateWizards, 500);
   };
+
   var onUserFireballTagClick = function () {
     colorize(false, userFireballTag, userFireballInputTag, data.fireballColors)
   };
